@@ -1,0 +1,80 @@
+<div class="game-details-container">
+  <div class="game-details-header">
+    <img [src]="gameDetails?.thumbnail" alt="">
+    <div class="game-details-title">
+      <h1>{{ gameDetails?.title }}</h1>
+      <span>
+        {{ gameDetails?.platform }}
+        <svg *ngIf="gameDetails?.platform?.includes('Windows')" class="computer-svg" xmlns="http://www.w3.org/2000/svg"
+          height="24" viewBox="0 -960 960 960" width="24">
+          <path
+            d="M12-76v-106h936v106H12Zm142-146q-43.725 0-74.862-31.137Q48-284.275 48-328v-448q0-43.725 31.138-74.862Q110.275-882 154-882h652q43.725 0 74.862 31.138Q912-819.725 912-776v448q0 43.725-31.138 74.863Q849.725-222 806-222H154Zm0-106h652v-448H154v448Zm0 0v-448 448Z" />
+        </svg>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="slides && slides.length > 0" class="game-carousel">
+    <app-carousel [images]="slides"></app-carousel>
+  </div>
+  <div class="game-details-content">
+    <div class="game-details">
+      <ul class="game-widgets">
+        <li>
+          <strong>Lançamento: </strong>
+          <span>{{ formatDate(gameDetails?.release_date) }}</span>
+        </li>
+        <li>
+          <strong>Desenvolvedora: </strong>
+          <span>{{ gameDetails?.developer }}</span>
+        </li>
+        <li>
+          <strong>Distribuidor: </strong>
+          <span>{{ gameDetails?.publisher }}</span>
+        </li>
+        <li>
+          <strong>Categoria/Gênero: </strong>
+          <span>{{ gameDetails?.genre }}</span>
+        </li>
+        <li>
+          <strong>Descrição: </strong>
+          <span>{{ gameDetails?.description }}</span>
+        </li>
+      </ul>
+      <div class="minimum-requirements">
+        <h2>Reqisitos Mínimos de Sistema</h2>
+        <ul>
+          <li>
+            <strong>Sistema Operacional: </strong>
+            <span>{{ gameDetails?.minimum_system_requirements?.os }}</span>
+          </li>
+          <li>
+            <strong>Processador: </strong>
+            <span>{{ gameDetails?.minimum_system_requirements?.processor }}</span>
+          </li>
+          <li>
+            <strong>Memória: </strong>
+            <span>{{ gameDetails?.minimum_system_requirements?.memory }}</span>
+          </li>
+          <li>
+            <strong>Placa de vídeo: </strong>
+            <span>{{ gameDetails?.minimum_system_requirements?.graphics }}</span>
+          </li>
+          <li>
+            <strong>Armazenamento: </strong>
+            <span>{{ gameDetails?.minimum_system_requirements?.storage }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="game-details-buttons">
+        <button class="redirect-button" (click)="openGamePage(gameDetails?.game_url)">Jogue Agora</button>
+        <button class="favorite-button" (click)="toggleFavorited()">
+          <i *ngIf="favorited; else notFavorited" class="fa-solid fa-heart"></i>
+          <ng-template #notFavorited>
+            <i class="fa-regular fa-heart"></i>
+          </ng-template>
+          <span style="color: white!important;">Favoritar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

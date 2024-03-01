@@ -1,0 +1,29 @@
+<div class="card-container" (click)="redirectToGameDetails(game.id)">
+  <img [src]="game.thumbnail" alt="game-image" class="card-image">
+
+  <div class="card-content">
+    <div class="card-header">
+      <label>
+        {{ game.title }}
+      </label>
+      <span>Grátis</span>
+    </div>
+    <p>{{ game.short_description }}</p>
+  
+    <div class="game-details">
+      <span class="favorited-icon" *ngIf="isFavorite(); else notFavorited" (click)="removeFavorite($event)">
+        <i class="fa-solid fa-heart filled-heart-icon"></i>
+      </span>
+      <ng-template #notFavorited>
+        <span class="favorited-icon" (click)="addFavorite($event)">
+          <i class="fa-regular fa-heart empty-heart-icon"></i>
+        </span>
+      </ng-template>
+      <div style="display: flex;  column-gap: 8px; align-items: center;">
+        <span class="game-genre">{{ game.genre }}</span>
+        <svg alt="Plataforma PC(Windows)" *ngIf="game.platform.includes('PC')" class="computer-svg" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M12-76v-106h936v106H12Zm142-146q-43.725 0-74.862-31.137Q48-284.275 48-328v-448q0-43.725 31.138-74.862Q110.275-882 154-882h652q43.725 0 74.862 31.138Q912-819.725 912-776v448q0 43.725-31.138 74.863Q849.725-222 806-222H154Zm0-106h652v-448H154v448Zm0 0v-448 448Z"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
